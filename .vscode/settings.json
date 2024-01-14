@@ -1,5 +1,6 @@
 {
     "rust-analyzer.linkedProjects": [
+        "basic/add/Cargo.toml",
         "basic/adder/Cargo.toml",
         "basic/aggregator/Cargo.toml",
         "basic/box_smart_pointer/Cargo.toml",
