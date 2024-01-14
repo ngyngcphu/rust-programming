@@ -1,5 +1,5 @@
 [package]
-name = "minigrep"
+name = "zinugrep"
 version = "0.1.0"
 edition = "2021"
 description = "A simple command line search tool that reads the file, finds lines in that file that contain the string argument, and prints those lines."
