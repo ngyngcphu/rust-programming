@@ -15,6 +15,7 @@
         "basic/lifetimes/Cargo.toml",
         "basic/ownership/Cargo.toml",
         "basic/message_passing/Cargo.toml",
+        "basic/mutex/Cargo.toml",
         "basic/rc_smart_pointer/Cargo.toml",
         "basic/rectangles/Cargo.toml",
         "basic/restaurant/Cargo.toml",
