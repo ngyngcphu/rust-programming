@@ -20,6 +20,7 @@
         "basic/shirt_company/Cargo.toml",
         "basic/sort_closure/Cargo.toml",
         "basic/test_macro/Cargo.toml",
+        "basic/thread/Cargo.toml",
         "basic/validation/Cargo.toml",
         "basic/variables/Cargo.toml",
         "basic/vecto/Cargo.toml",
