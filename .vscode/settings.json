@@ -9,6 +9,7 @@
         "basic/generic/Cargo.toml",
         "basic/generic_trait_lifetime/Cargo.toml",
         "basic/guessing_game/Cargo.toml",
+        "basic/hashmap/Cargo.toml",
         "basic/hello_macro/Cargo.toml",
         "basic/ip_address/Cargo.toml",
         "basic/iterators/Cargo.toml",
