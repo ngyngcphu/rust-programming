@@ -29,6 +29,8 @@
         "basic/vecto/Cargo.toml",
         "basic/workout/Cargo.toml",
         "basic/unsafe_rust/Cargo.toml",
+        "inverted-index/Cargo.toml",
+        "project/csv-processing/Cargo.toml",
         "project/file-system/Cargo.toml",
         "project/minigrep/Cargo.toml"
     ]
