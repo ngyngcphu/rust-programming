@@ -18,6 +18,7 @@
         "basic/mutex/Cargo.toml",
         "basic/rc_smart_pointer/Cargo.toml",
         "basic/rectangles/Cargo.toml",
+        "basic/refcell/Cargo.toml",
         "basic/restaurant/Cargo.toml",
         "basic/shirt_company/Cargo.toml",
         "basic/sort_closure/Cargo.toml",
