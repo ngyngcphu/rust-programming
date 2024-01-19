@@ -1,7 +1,7 @@
 use rust_stemmers::{Algorithm, Stemmer};
-use stop_words;
 use std::borrow::Cow;
 use std::collections::HashSet;
+use stop_words;
 
 pub enum Language {
     English,
@@ -36,7 +36,7 @@ impl Default for Filters {
 }
 
 impl Filters {
-    fn new(language: Language) -> Self {
+    pub fn new(language: Language) -> Self {
         Filters {
             stop_words_list: language.get_stop_words(),
             stemmer: Stemmer::create(language.get()),

@@ -1,8 +1,8 @@
 use unicode_segmentation::UnicodeSegmentation;
 
-pub struct Tokenize {}
+pub struct Tokenizer {}
 
-impl Tokenize {
+impl Tokenizer {
     pub fn new() -> Self {
         Self {}
     }
@@ -22,7 +22,7 @@ mod tokenizer_tests {
     #[test]
     fn test_tokenize() {
         let text = "Hello #{$}! I'm test suite & I ... contain number 32!!";
-        let tokenizer = Tokenize::new();
+        let tokenizer = Tokenizer::new();
         let res: Vec<String> = tokenizer.tokenize(text).collect();
         let expected = [
             "Hello", "I'm", "test", "suite", "I", "contain", "number", "32",
