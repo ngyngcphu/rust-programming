@@ -1,6 +1,7 @@
-use rust_stemmers::{Algorithm, Stemmer};
 use std::borrow::Cow;
 use std::collections::HashSet;
+
+use rust_stemmers::{Algorithm, Stemmer};
 use stop_words;
 
 pub enum Language {

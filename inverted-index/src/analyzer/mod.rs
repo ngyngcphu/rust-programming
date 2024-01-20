@@ -13,14 +13,14 @@ impl Default for Analyzer {
 }
 
 impl Analyzer {
-    fn new(language: Language) -> Self {
+    pub fn new(language: Language) -> Self {
         Analyzer {
             tokenizer: Tokenizer::new(),
             filters: Filters::new(language),
         }
     }
 
-    fn analyze(&self, text: &str) -> Vec<String> {
+    pub fn analyze(&self, text: &str) -> Vec<String> {
         let tokens = self.tokenizer.tokenize(text);
         let low = self.filters.lowercase(tokens);
         let stopped = self.filters.stop_words(low);

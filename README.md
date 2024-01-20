@@ -63,14 +63,14 @@ Normalize tokens using techniques:
         ```
 Unfortunately, Snowball does not yet support Vietnamese.
 ### 3. Analyzer
-This is a summary of the two steps above: `Tokenizer` and `Filter`. Create a struct `Analyzer`:
+This is a summary of the two steps above: `Tokenizer` and `Filters`. Create a struct `Analyzer`:
 ```rs
 pub struct Analyzer {
     tokenizer: Tokenizer,
     filters: Filters,
 }
 ```
-Implement method `analyze` for `Analyzer`: takes a string slice, return normalization tokens:
+Implement method `analyze` for `Analyzer`: takes a string slice, returns normalization tokens:
 ```rs
 fn analyze(&self, text: &str) -> Vec<String> {
     let tokens = self.tokenizer.tokenize(text);
@@ -79,3 +79,95 @@ fn analyze(&self, text: &str) -> Vec<String> {
     self.filters.stemming(stopped).collect()
 }
 ```
+### 4. Indexing
+Find the intersection of IDs for given tokens by Inverted Index technique.  
+- Create an Inverted Index, using HashMap that has a String key and a HashSet value. The String represents a token and the HashSet holds the document IDs that contain that token.
+    ```rs
+    pub struct InvertedIndex {
+        idx: HashMap<String, HashSet<u64>>,
+        analyzer: Analyzer,
+    }
+    ``` 
+- Run filters on the document and then adding document IDs to a set.
+    - Input:
+        ```
+        [
+            {
+                id: 1,
+                text: "The quick brown fox jumped over the lazy dog".to_string(),
+            },
+            {
+                id: 2,
+                text: "Quick brown foxes leap over lazy dogs in summer".to_string(),
+            },
+        ]
+        ```
+    - Output:
+        ```
+        {
+            "jump": {1},
+            "quick": {1, 2},
+            "summer": {2},
+            "dog": {1, 2},
+            "brown": {2, 1},
+            "lazi": {1, 2},
+            "leap": {2},
+            "fox": {2, 1},
+        }
+        ```
+    - Inplement:
+        ```rs
+        fn add(&mut self, docs: &[Document]) {
+            for doc in docs {
+                for token in self.analyzer.analyze(doc.text.as_str()) {
+                    match self.idx.get_mut(&token) {
+                        None => {
+                            let v = HashSet::from([doc.id]);
+                            self.idx.insert(token, v);
+                        }
+                        Some(v) => {
+                            v.insert(doc.id);
+                        }
+                    }
+                }
+            }
+        }
+        ```
+- Search text in index, identify the IDs that match the given tokens in index.  
+    > Example: Where is text "brown foxes" ?
+
+    - Tokens in Inverted Index data structure:
+        ```
+        {
+            "jump": {1},
+            "quick": {1, 2},
+            "summer": {2},
+            "dog": {1, 2},
+            "brown": {2, 1},
+            "lazi": {1, 2},
+            "leap": {2},
+            "fox": {2, 1},
+        }
+        ```
+    - Result:
+        ```
+        {1, 2}
+        ```
+    - Implement:
+        ```rs
+        fn search(&self, text: &str) -> HashSet<u64> {
+            let mut result: HashSet<u64> = HashSet::new();
+            for token in self.analyzer.analyze(text) {
+                match self.idx.get(&token) {
+                    None => {}
+                    Some(ids) => {
+                        if result.is_empty() {
+                            result = ids.clone();
+                        }
+                        result = result.intersection(ids).copied().collect()
+                    }
+                }
+            }
+            result
+        }
+        ```
