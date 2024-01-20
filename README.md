@@ -94,11 +94,11 @@ Find the intersection of IDs for given tokens by Inverted Index technique.
         [
             {
                 id: 1,
-                text: "The quick brown fox jumped over the lazy dog".to_string(),
+                text: "The quick brown fox jumped over the lazy dog",
             },
             {
                 id: 2,
-                text: "Quick brown foxes leap over lazy dogs in summer".to_string(),
+                text: "Quick brown foxes leap over lazy dogs in summer",
             },
         ]
         ```
@@ -171,3 +171,5 @@ Find the intersection of IDs for given tokens by Inverted Index technique.
             result
         }
         ```
+## References
+1. [https://early-etudes.com/posts/inverted-index/](https://early-etudes.com/posts/inverted-index/)
