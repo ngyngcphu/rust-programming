@@ -1,4 +1,4 @@
-use text_processing::regex::{self, extract_hashtags};
+use text_processing::{regex, string_parsing};
 
 fn main() {
     assert_eq!(
@@ -13,7 +13,7 @@ fn main() {
     assert_eq!(regex::extract_login(r"Not an email@email"), None);
 
     let tweet = "Hey #world, I just got my new #dog, say hello to Till. #dog #forever #2 #_ ";
-    let tags = extract_hashtags(tweet);
+    let tags = regex::extract_hashtags(tweet);
     assert!(tags.contains("#dog") && tags.contains("#forever") && tags.contains("#world"));
     assert_eq!(tags.len(), 3);
 
@@ -40,4 +40,7 @@ fn main() {
     let before = "2012-03-14, 2013-01-15 and 2014-07-05";
     let after = regex::reformat_dates(before);
     assert_eq!(after, "03/14/2012, 01/15/2013 and 07/05/2014");
+
+    let code = r"#fa7268";
+    string_parsing::convert_hex_color_to_rgb_color(code);
 }
