@@ -11,8 +11,10 @@ struct Record {
 
 pub fn read_csv_with_different_delimiter() -> Result<(), Error> {
     let data = "name\tplace\tid
+mark\tsydney\t46.5
 Mark\tMelbourne\t46
-Ashley\tZurich\t92";
+Ashley\tZurich\t92
+alisha\tcolombo\txyz";
     let mut reader = ReaderBuilder::new()
         .delimiter(b'\t')
         .from_reader(data.as_bytes());
