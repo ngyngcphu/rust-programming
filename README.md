@@ -1,5 +1,5 @@
 # Rust-Programming
-## Inverted Index
+## I. Inverted Index
 ### 1. Tokenizer
 Example:
 - Original text: 
@@ -171,5 +171,8 @@ Find the intersection of IDs for given tokens by Inverted Index technique.
             result
         }
         ```
+## II. CSV - SQL
+
+
 ## References
-1. [https://early-etudes.com/posts/inverted-index/](https://early-etudes.com/posts/inverted-index/)
+1. **Inverted index**: [https://early-etudes.com/posts/inverted-index/](https://early-etudes.com/posts/inverted-index/)
