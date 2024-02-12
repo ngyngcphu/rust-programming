@@ -35,6 +35,7 @@
         "project/csv-processing/Cargo.toml",
         "project/file-system/Cargo.toml",
         "project/minigrep/Cargo.toml",
+        "project/mongo-database/Cargo.toml",
         "project/sqlite/Cargo.toml",
         "project/text-processing/Cargo.toml",
     ]

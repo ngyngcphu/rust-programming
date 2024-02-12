@@ -35,9 +35,9 @@ mod analyzer_tests {
     #[test]
     fn test_analyzer() {
         let analyzer = Analyzer::default();
-        let text = "The rain, rain poured and poured, creating a rhythmic symphony of droplets on the windowpane!";
+        let text = "event_handler.rs - tpulse - Visual Studio Code";
         let res = analyzer.analyze(text);
         // Result: ["rain", "pour", "creat", "rhythmic", "symphoni", "droplet", "windowpan"]
-        assert_eq!(res.len(), 7, "text analyze failed");
+        assert_eq!(res, [""], "text analyze failed");
     }
 }
