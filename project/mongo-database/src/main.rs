@@ -1,28 +1,18 @@
-use mongodb::{
-    bson::doc,
-    options::{ClientOptions, ServerApi, ServerApiVersion},
-    Client,
-};
+use mongodb::Client;
+
+mod connection;
+mod find_document;
 
 #[tokio::main]
-async fn main() -> mongodb::error::Result<()> {
-    // Replace the placeholder with your Atlas connection string
-    let uri = "mongodb://localhost:27017";
-    let mut client_options = ClientOptions::parse_async(uri).await?;
+async fn main() {
+    let uri = "mongodb://admin:admin123@14.225.192.183:27017";
+    let client = Client::with_uri_str(uri).await.unwrap();
 
-    // Set the server_api field of the client_options object to Stable API version 1
-    let server_api = ServerApi::builder().version(ServerApiVersion::V1).build();
-    client_options.server_api = Some(server_api);
+    connection::connect(&client).await.unwrap();
 
-    // Create a new client and connect to the server
-    let client = Client::with_options(client_options)?;
+    println!("**********Find a document**********");
+    find_document::find_one(&client).await.unwrap();
 
-    // Send a ping to confirm a successful connection
-    client
-        .database("admin")
-        .run_command(doc! { "ping": 1 }, None)
-        .await?;
-    println!("Pinged your deployment. You successfully connected to MongoDB!");
-
-    Ok(())
+    println!("*********Find multiple documents*********");
+    find_document::find_many(&client).await.unwrap();
 }
