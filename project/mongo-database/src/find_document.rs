@@ -17,7 +17,7 @@ pub async fn find_one(client: &Client) -> mongodb::error::Result<()> {
         .find_one(doc! {"name": "Tompkins Square Bagels"}, None)
         .await?;
 
-    println!("{:#?}", result.unwrap());
+    println!("{:#?}", result);
 
     Ok(())
 }
