@@ -1,5 +1,9 @@
 use futures::TryStreamExt;
-use mongodb::{bson::doc, Client, Collection, IndexModel};
+use mongodb::{
+    bson::{doc, Document},
+    options::FindOptions,
+    Client, Collection, IndexModel,
+};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -16,8 +20,17 @@ pub async fn search(client: &Client) -> mongodb::error::Result<()> {
 
     my_coll.create_index(index, None).await?;
 
-    let filter = doc! { "$text": { "$search": "vegan -tofu" } };
-    let mut cursor = my_coll.find(filter, None).await?;
+    let filter = doc! { "$text": { "$search": "vegetarian" } };
+    let sort = doc! {"score": { "$meta": "textScore" }};
+    let projection = doc! {"_id": 0, "name": 1, "score": {"$meta": "textScore"}};
+    let opts = FindOptions::builder()
+        .sort(sort)
+        .projection(projection)
+        .build();
+
+    let doc_coll: Collection<Document> = my_coll.clone_with_type();
+
+    let mut cursor = doc_coll.find(filter, opts).await?;
     while let Some(doc) = cursor.try_next().await? {
         println!("{:?}", doc);
     }
