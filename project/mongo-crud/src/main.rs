@@ -1,3 +1,4 @@
+mod aggregation;
 mod compound_operation;
 mod insert;
 mod retrieve_data;
@@ -11,12 +12,6 @@ async fn main() {
     let uri = "mongodb://admin:admin123@14.225.192.183:27017";
     let client = Client::with_uri_str(uri).await.unwrap();
 
-    println!("********* Find and Delete a Document *********");
-    compound_operation::find_and_delete(&client).await.unwrap();
-
-    println!("********* Find and Update a Document *********");
-    compound_operation::find_and_update(&client).await.unwrap();
-
-    println!("********* Find and Replace a Document *********");
-    compound_operation::find_and_replace(&client).await.unwrap();
+    println!("********* Group by Time Component *********");
+    aggregation::aggregate_time(&client).await.unwrap();
 }
