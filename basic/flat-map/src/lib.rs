@@ -38,8 +38,14 @@ where
                 if let Some(val) = inner.next() {
                     return Some(val);
                 }
+                self.inner = None;
+            } else {
+                if let Some(next_item) = self.iter.next() {
+                    self.inner = Some((self.f)(next_item).into_iter());
+                } else {
+                    return None;
+                }
             }
-            self.inner = Some((self.f)(self.iter.next()?).into_iter());
         }
     }
 }
