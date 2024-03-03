@@ -3,7 +3,7 @@ struct ByteIter<'a> {
 }
 
 impl<'a> ByteIter<'a> {
-    fn next(&mut self) -> Option<&'a u8> {
+    fn next(&mut self) -> Option<&u8> {
         if self.remainder.is_empty() {
             None
         } else {
